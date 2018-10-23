@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="the_interpreter">
+  <ClassDiagramComponents>
+    <Class name="Program" package="" visibility="public" xPosition="13.0" yPosition="16.0">
+      <Fields>
+        <Field name="allByteCodes" type="ArrayList&lt;Bytecode&gt;" visibility="private" isStatic="true"/>
+        <Field name="labels" type="HashMap" visibility="private"/>
+        <Field name="i" type="int[]" visibility="private"/>
+        <Field name="j" type="int[]" visibility="private"/>
+        <Field name="m" type="int[]" visibility="private"/>
+        <Field name="k" type="int[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="factorial" returnType="int" visibility="public">
+          <Argument type="int" name="n"/>
+        </Method>
+        <Method name="fibonacci" returnType="int" visibility="public">
+          <Argument type="int" name="n"/>
+        </Method>
+        <Method name="Read" returnType="int" visibility="public">
+          <Argument type="int" name="x"/>
+        </Method>
+        <Method name="f" returnType="int" visibility="public">
+          <Argument type="int" name="i"/>
+        </Method>
+        <Method name="Write" returnType="int" visibility="public"/>
+        <Method name="resolveAddress" returnType="void" visibility="public"/>
+        <Method name="set_value" returnType="int" visibility="public">
+          <Argument type="String" name="x"/>
+          <Argument type="int" name="val"/>
+        </Method>
+        <Method name="add" returnType="ByteCode" visibility="public">
+          <Argument type="ByteCode" name="bc"/>
+        </Method>
+        <Method name="getCode" returnType="int" visibility="public">
+          <Argument type="int" name="pc"/>
+        </Method>
+        <Method name="add_v" returnType="String" visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="x"/>
+          <Argument type="String" name="whole"/>
+        </Method>
+        <Method name="check_key" returnType="String" visibility="public">
+          <Argument type="String" name="x"/>
+        </Method>
+        <Method name="get_val" returnType="String" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="get_all_size" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="interpreter" package="" visibility="public" xPosition="442.0" yPosition="27.0">
+      <Fields>
+        <Field name="bcl" type="ByteCodeLoader" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="Interpreter" returnType="String" visibility="public">
+          <Argument type="String" name="codeFile"/>
+        </Method>
+        <Method name="run" returnType="void" visibility="public"/>
+        <Method name="main" returnType="String" visibility="public">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="VirtualMachine" package="" visibility="public" xPosition="803.0" yPosition="-1.0">
+      <Fields>
+        <Field name="runStack" type="RunTimeStack" visibility="private"/>
+        <Field name="pc" type="int" visibility="private"/>
+        <Field name="returnAddrs" type="Stack" visibility="private"/>
+        <Field name="isRunning" type="Boolean" visibility="private"/>
+        <Field name="program" type="Program" visibility="private"/>
+        <Field name="inter_switch" type="boolean" visibility="private"/>
+        <Field name="returnFnames" type="Stack" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="executeProgram" returnType="void" visibility="public"/>
+        <Method name="VirtualMachine" returnType="void" visibility="public"/>
+        <Method name="clean" returnType="void" visibility="public"/>
+        <Method name="switch_dump" returnType="boolean" visibility="public">
+          <Argument type="boolean" name="x"/>
+        </Method>
+        <Method name="invokeAcall" returnType="String" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="get_return_N" returnType="String" visibility="public"/>
+        <Method name="get_return_add" returnType="int" visibility="public"/>
+        <Method name="add_return_addN" returnType="int" visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="x"/>
+        </Method>
+        <Method name="resolve_ret_addr" returnType="int" visibility="public"/>
+        <Method name="cur_pc" returnType="int" visibility="public"/>
+        <Method name="mod_pc" returnType="int" visibility="public">
+          <Argument type="int" name="x"/>
+        </Method>
+        <Method name="add_v" returnType="String" visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="x"/>
+          <Argument type="String" name="whole"/>
+        </Method>
+        <Method name="get_rts" returnType="RunTimeStack" visibility="public"/>
+        <Method name="stop_running" returnType="void" visibility="public"/>
+        <Method name="add_addr" returnType="String" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="String" name="Vname"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Bytecode" package="" visibility="public" isAbstract="true" xPosition="21.0" yPosition="512.0">
+      <Fields>
+        <Field name="value" type="String" visibility="private"/>
+        <Field name="syntax" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="execute" returnType="VirtualMachine" visibility="public" isAbstract="true">
+          <Argument type="VirtualMachine" name="aThis"/>
+        </Method>
+        <Method name="get_value" returnType="String" visibility="public"/>
+        <Method name="set_value" returnType="String" visibility="public">
+          <Argument type="String" name="x"/>
+        </Method>
+        <Method name="get_syntax" returnType="String" visibility="public"/>
+        <Method name="set_syntax" returnType="String" visibility="public">
+          <Argument type="String" name="x"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="RuntimeStack" package="" visibility="private" xPosition="330.0" yPosition="275.0">
+      <Fields>
+        <Field name="runStack" type="ArrayList&lt;Integer&gt;" visibility="private"/>
+        <Field name="FramePointer" type="Stack" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="push" returnType="int" visibility="public">
+          <Argument type="int" name="x"/>
+        </Method>
+        <Method name="pop" returnType="int" visibility="public"/>
+        <Method name="popFrame" returnType="int[]" visibility="public"/>
+        <Method name="RuntimeStack" returnType="void" visibility="public"/>
+        <Method name="dump" returnType="void" visibility="public"/>
+        <Method name="peek" returnType="int" visibility="public"/>
+        <Method name="newFrameAt" returnType="int" visibility="public">
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="store" returnType="int" visibility="public">
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="load" returnType="int" visibility="public">
+          <Argument type="int" name="offset"/>
+        </Method>
+        <Method name="push" returnType="Integer" visibility="public">
+          <Argument type="Integer" name="val"/>
+        </Method>
+        <Method name="add_dir_fp" returnType="int" visibility="public">
+          <Argument type="int" name="x"/>
+        </Method>
+        <Method name="clear" returnType="void" visibility="public"/>
+        <Method name="peekFP" returnType="int" visibility="public"/>
+        <Method name="popFP" returnType="int" visibility="public"/>
+        <Method name="get_frameP_size" returnType="int" visibility="public"/>
+        <Method name="get_size" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="BytecodeLoader" package="" visibility="public" xPosition="777.0" yPosition="627.0">
+      <Fields>
+        <Field name="p" type="Program" visibility="private"/>
+        <Field name="initCodes" type="ArrayList&lt;String&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="ByteCodeLoader" returnType="String" visibility="public">
+          <Argument type="String" name="programFile"/>
+        </Method>
+        <Method name="loadCodes" returnType="Program" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Codetable" package="" visibility="public" xPosition="530.0" yPosition="627.0">
+      <Fields>
+        <Field name="names" type="hashmap" visibility="private" isStatic="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="get" returnType="String" visibility="public" isStatic="true">
+          <Argument type="String" name="key"/>
+        </Method>
+        <Method name="init" returnType="void" visibility="public" isStatic="true"/>
+      </Methods>
+    </Class>
+    <Class name="Args,Bop,Call,Dump,FalseBranch,Goto,Halt,Label,Lit,Load,Pop,Read,Return,Store,Write" package="" visibility="public" xPosition="21.0" yPosition="798.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="access" source="VirtualMachine" target="interpreter" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="uses" source="BytecodeLoader" target="Codetable" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="controls" source="VirtualMachine" target="BytecodeLoader" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="controls" source="VirtualMachine" target="RuntimeStack" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="has" source="interpreter" target="BytecodeLoader" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Args,Bop,Call,Dump,FalseBranch,Goto,Halt,Label,Lit,Load,Pop,Read,Return,Store,Write" target="Bytecode"/>
+    <HasRelation name="access" source="VirtualMachine" target="Program" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="has" source="Program" target="Bytecode" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
